@@ -1,8 +1,6 @@
 package Grupo3TBD.ClimateViewer.entities;
 
-import lombok.Data;
 
-@Data
 public class PuntoMedicion {
     private Long id;
     private String nombre;
