@@ -1,6 +1,7 @@
 package Grupo3TBD.ClimateViewer.controllers;
 
 import Grupo3TBD.ClimateViewer.DTO.EventoExtremoDTO;
+import Grupo3TBD.ClimateViewer.DTO.TendenciaMensualDTO;
 import Grupo3TBD.ClimateViewer.repository.MedicionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -25,4 +26,10 @@ public class MedicionController {
     public List<EventoExtremoDTO> getEventosExtremosTemperaturaUltimoAno() {
         return medicionRepository.findEventosExtremosTemperaturaUltimoAno();
     }
+
+    @GetMapping("/tendencia-mensual")
+    public List<TendenciaMensualDTO> listarTendenciaMensual() {
+        return medicionRepository.obtenerTendenciaMensual();
+    }
+
 }

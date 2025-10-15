@@ -3,6 +3,7 @@ package Grupo3TBD.ClimateViewer.repository;
 
 import Grupo3TBD.ClimateViewer.DTO.CorrelacionDTO;
 import Grupo3TBD.ClimateViewer.DTO.EventoExtremoDTO;
+import Grupo3TBD.ClimateViewer.DTO.TendenciaMensualDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -50,4 +51,30 @@ public class MedicionRepository {
                 }
         );
     }
+
+    public List<TendenciaMensualDTO> obtenerTendenciaMensual() {
+        jdbcTemplate.execute("REFRESH MATERIALIZED VIEW CONCURRENTLY tendencia_mensual;");
+        String sql = """
+            SELECT 
+                TipoSensor, 
+                TO_CHAR(mes, 'YYYY-MM') AS mes,
+                promedio_mensual, 
+                cantidad_mediciones
+            FROM tendencia_mensual
+            ORDER BY TipoSensor, mes;
+            """;
+
+        return jdbcTemplate.query(
+                sql,
+                (rs, rowNum) -> new TendenciaMensualDTO(
+                        rs.getString("TipoSensor"),
+                        rs.getString("mes"),
+                        rs.getDouble("promedio_mensual"),
+                        rs.getInt("cantidad_mediciones")
+                )
+        );
+    }
+
+
+
 }
