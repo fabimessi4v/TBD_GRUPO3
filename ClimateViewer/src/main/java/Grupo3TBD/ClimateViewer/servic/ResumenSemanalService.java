@@ -11,11 +11,11 @@ import java.util.List;
 public class ResumenSemanalService {
 
     @Autowired ResumenSemanalRepository resumenSemanalRepository;
-    public void recalcularResumenSemanal(int idDataset) {
+    public void recalcularResumenSemanal(Integer idDataset) {
         resumenSemanalRepository.recalcularResumenSemanal(idDataset);
     }
 
-    public List<ResumenSemanalDTO> recalcularResumenSemanalyObtener(int idDataset) {
+    public List<ResumenSemanalDTO> recalcularResumenSemanalyObtener(Integer idDataset) {
         resumenSemanalRepository.recalcularResumenSemanal(idDataset);
         return resumenSemanalRepository.obtenerResumenEspecifico(idDataset);
     }
@@ -24,7 +24,7 @@ public class ResumenSemanalService {
         return resumenSemanalRepository.obtenerResumen();
     }
 
-    public List<ResumenSemanalDTO> obtenerResumenEspecifico(int idDataset) {
+    public List<ResumenSemanalDTO> obtenerResumenEspecifico(Integer idDataset) {
         return resumenSemanalRepository.obtenerResumenEspecifico(idDataset);
     }
 

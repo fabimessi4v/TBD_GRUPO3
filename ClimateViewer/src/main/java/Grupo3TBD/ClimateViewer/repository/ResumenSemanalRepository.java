@@ -21,7 +21,7 @@ public class ResumenSemanalRepository {
      * resumen semanal
      @param idDataset que se está consultando
      */
-    public void recalcularResumenSemanal(int idDataset) {
+    public void recalcularResumenSemanal(Integer idDataset) {
         String sql = "CALL interpolar_datos_semanales(?);";
         jdbcTemplate.update(sql, idDataset);
     }
@@ -51,7 +51,7 @@ public class ResumenSemanalRepository {
      @param idDataset que se está consultando
      @return Lista de objetos ResumenSemanal
      */
-    public List<ResumenSemanalDTO> obtenerResumenEspecifico(int idDataset) {
+    public List<ResumenSemanalDTO> obtenerResumenEspecifico(Integer idDataset) {
         String sql = """
         SELECT iddataset, semana, promedio
         FROM resumen_semanal

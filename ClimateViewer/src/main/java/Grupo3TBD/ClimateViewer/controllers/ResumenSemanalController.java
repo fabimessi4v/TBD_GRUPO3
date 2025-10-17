@@ -15,22 +15,22 @@ public class ResumenSemanalController {
     @Autowired
     private ResumenSemanalService resumenSemanalService;
     @GetMapping("/obtenerListaResumen/{idDataset}")
-    public List<ResumenSemanalDTO> obtenerResumenSemanal(@PathVariable int idDataset){
+    public List<ResumenSemanalDTO> obtenerResumenSemanal(@PathVariable Integer idDataset){
         return resumenSemanalService.obtenerResumenSemanal();
     }
 
     @GetMapping("/obtenerListaResumenEspecifico/{idDataset}")
-    public List<ResumenSemanalDTO> obtenerResumenSemanalEspecifico(@PathVariable int idDataset){
+    public List<ResumenSemanalDTO> obtenerResumenSemanalEspecifico(@PathVariable Integer idDataset){
         return resumenSemanalService.obtenerResumenEspecifico(idDataset);
     }
 
     @PostMapping("/recalcularResumen/{idDataset}")
-    public void recalcularResumen(@PathVariable int idDataset){
+    public void recalcularResumen(@PathVariable Integer idDataset){
         resumenSemanalService.recalcularResumenSemanal(idDataset);
     }
 
     @PostMapping("/recalcularResumenyObtener/{idDataset}")
-    public List<ResumenSemanalDTO> recalcularResumenyObtener(@PathVariable int idDataset){
+    public List<ResumenSemanalDTO> recalcularResumenyObtener(@PathVariable Integer idDataset){
         return resumenSemanalService.recalcularResumenSemanalyObtener(idDataset);
     }
 
