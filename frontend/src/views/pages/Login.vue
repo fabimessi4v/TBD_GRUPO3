@@ -35,6 +35,11 @@
                     </CCol>
                   </CRow>
                 </CForm>
+                <div class="text-center mt-3">
+                    <router-link to="/seleccion" class="alsoButton">
+                      Ingresar sin iniciar sesión
+                    </router-link>
+                </div>
               </CCardBody>
             </CCard>
           </CCardGroup>

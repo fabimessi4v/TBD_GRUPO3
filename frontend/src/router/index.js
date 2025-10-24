@@ -1,15 +1,27 @@
 import { h, resolveComponent } from 'vue'
 import { createRouter, createWebHashHistory } from 'vue-router'
-
-import DefaultLayout from '@/layouts/DefaultLayout'
+import DefaultLayout from '@/layouts/DefaultLayout.vue'
 
 const routes = [
   {
     path: '/',
     name: 'Login',
-    // Login route as a top-level route
-    component: () =>
-      import(/* webpackChunkName: "login" */ '@/views/pages/Login.vue')
+    component: () => import('@/views/pages/Login.vue')
+  },
+  {
+    path: '/seleccion',
+    name: 'Seleccion',
+    component: () => import('@/views/pages/Seleccion.vue')
+  },
+  {
+    path: '/resumenSemanal',
+    name: 'ResumenSemanal',
+    component: () => import('@/views/pages/ResumenSemanal.vue')
+  },
+  {
+    path: '/agregaciondedatos',
+    name: 'AgregacionDeDatos',
+    component: () => import('@/views/pages/AgregacionDeDatos.vue')
   },
   {
     path: '/dashboard',
@@ -19,13 +31,7 @@ const routes = [
       {
         path: '',
         name: 'Dashboard',
-        // route level code-splitting
-        // this generates a separate chunk (about.[hash].js) for this route
-        // which is lazy-loaded when the route is visited.
-        component: () =>
-          import(
-            /* webpackChunkName: "dashboard" */ '@/views/dashboard/Dashboard.vue'
-          ),
+        component: () => import('@/views/dashboard/Dashboard.vue')
       }
     ]
   }
@@ -35,9 +41,8 @@ const router = createRouter({
   history: createWebHashHistory(import.meta.env.BASE_URL),
   routes,
   scrollBehavior() {
-    // always scroll to top
     return { top: 0 }
-  },
+  }
 })
 
 export default router
