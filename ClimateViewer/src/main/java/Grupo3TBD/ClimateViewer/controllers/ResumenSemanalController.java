@@ -14,8 +14,8 @@ public class ResumenSemanalController {
 
     @Autowired
     private ResumenSemanalService resumenSemanalService;
-    @GetMapping("/obtenerListaResumen/{idDataset}")
-    public List<ResumenSemanalDTO> obtenerResumenSemanal(@PathVariable Integer idDataset){
+    @GetMapping("/obtenerListaResumen")
+    public List<ResumenSemanalDTO> obtenerResumenSemanal(){
         return resumenSemanalService.obtenerResumenSemanal();
     }
 

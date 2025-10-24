@@ -13,6 +13,20 @@ public class ResumenSemanalDTO {
         this.promedio = promedio;
     }
 
+    public ResumenSemanalDTO() {
+    }
+
+    public Integer getIdDataset() {
+        return idDataset;
+    }
+
+    public LocalDate getSemana() {
+        return semana;
+    }
+
+    public Double getPromedio() {
+        return promedio;
+    }
 }
 
 
