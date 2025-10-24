@@ -6,7 +6,7 @@
         Visualizar Resumen Semanal
       </router-link>
 
-      <router-link to="/agregacionDeDatos" class="alsoButton">
+      <router-link to="/agregaciondedatos" class="alsoButton">
         Agregar datos
       </router-link>
     </div>
