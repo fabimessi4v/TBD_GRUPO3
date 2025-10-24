@@ -39,7 +39,7 @@ const ocultarLista = () => {
         v-else 
         @click="ocultarLista" 
         class="btn-cargar">
-        Ocultar reporte
+        Ocultar reporte de todos los datasets
       </button>
       <router-link to="/resumensemanalporid" class="btn-cargar">
         Resumen semanal por id
