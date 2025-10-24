@@ -15,7 +15,6 @@ import java.util.List;
 public class AgregacionDeDatosController {
     @Autowired
     AgregacionDeDatosService agregacionDeDatosService;
-
     @PostMapping("/obtenerserietemporal")
     public List<AgregacionDeDatosDTO> obtenerSerieTemporal(@RequestBody SerieTemporalRequestDTO entrada) {
         return agregacionDeDatosService.obtenerSerieTemporal(
