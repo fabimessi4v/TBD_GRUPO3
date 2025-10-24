@@ -12,4 +12,19 @@ public class AgregacionDeDatosDTO {
         this.periodo = periodo;
         this.valor = valor;
     }
+
+    public AgregacionDeDatosDTO() {
+    }
+
+    public Integer getIdDataset() {
+        return idDataset;
+    }
+
+    public LocalDate getPeriodo() {
+        return periodo;
+    }
+
+    public Double getValor() {
+        return valor;
+    }
 }
