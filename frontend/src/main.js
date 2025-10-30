@@ -6,7 +6,7 @@ import router from './router'
 
 import CoreuiVue from '@coreui/vue'
 import CIcon from '@coreui/icons-vue'
-import { iconsSet as icons } from '@/assets/icons'
+import * as icons from '@coreui/icons'
 const app = createApp(App)
 app.use(createPinia())
 app.use(router)

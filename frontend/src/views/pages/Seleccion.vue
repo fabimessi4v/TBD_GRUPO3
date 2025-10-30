@@ -7,7 +7,7 @@
       </router-link>
 
       <router-link to="/agregaciondedatos" class="alsoButton">
-        Agregar datos
+        Obtener serie temporal
       </router-link>
     </div>
   </div>

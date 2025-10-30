@@ -21,7 +21,6 @@ const fetchListReportSummary = async () => {
     availableDataset.value = response.data
     mostrarLista.value = true
   } catch (error) {
-    console.error(error)
     alert('Error al recuperar los datos del reporte semanal: ' + error.message)
   }
 }
@@ -38,7 +37,6 @@ const fetchListById = async () => {
     availableDataset.value = response.data
     mostrarLista.value = true
   } catch (error) {
-    console.error(error)
     alert('Error al recuperar el dataset: ' + error.message)
   }
 }
@@ -54,7 +52,6 @@ const updateListById = async () => {
     await axios.post(url)
     alert('Resumen recalculado exitosamente para el dataset ' + idDataset.value)
   } catch (error) {
-    console.error(error)
     alert('Error al recalcular el resumen: ' + error.message)
   }
 }
@@ -71,7 +68,6 @@ const updateListByIdAndShow = async () => {
     availableDataset.value = response.data
     mostrarLista.value = true
   } catch (error) {
-    console.error(error)
     alert('Error al recalcular y obtener el resumen: ' + error.message)
   }
 }
@@ -80,6 +76,12 @@ const mostrarCampoId = () => {
   limpiarPantalla()
   mostrarIngresarId.value = true
 }
+
+const ocultarTodo = () => {
+  mostrarIngresarId.value = false
+  mostrarLista.value = false
+  availableDataset.value = []
+}
 </script>
 
 <template>
@@ -87,43 +89,42 @@ const mostrarCampoId = () => {
     <h3>Reporte semanal</h3>
 
     <div class="button-container">
+      <button @click="mostrarCampoId" class="btn-cargar">
+        Calcular y obtener resumen semanal por ID
+      </button>
+
       <button @click="fetchListReportSummary" class="btn-cargar">
         Reporte de todos los datasets
       </button>
 
-      <button @click="mostrarCampoId" class="btn-cargar">
-        Resumen semanal por ID
+      <button 
+        v-if="mostrarIngresarId || mostrarLista" 
+        @click="ocultarTodo" 
+        class="btn-ocultar">
+        Ocultar
       </button>
     </div>
 
     <div v-if="mostrarIngresarId" class="input-container">
       <input v-model="idDataset" type="number" placeholder="Ingrese ID del dataset" class="input-id" />
+      <button @click="updateListById" class="btn-cargar">Calcular resumen semanal</button>
+      <button @click="updateListByIdAndShow" class="btn-cargar">Calcular y Mostrar resumen semanal</button>
       <button @click="fetchListById" class="btn-cargar">Buscar</button>
-      <button @click="updateListById" class="btn-cargar">Recalcular</button>
-      <button @click="updateListByIdAndShow" class="btn-cargar">Recalcular y Mostrar</button>
     </div>
 
     <ul v-if="mostrarLista && availableDataset.length">
       <li v-for="objeto in availableDataset" :key="objeto.idDataset" class="report-item">
         <div class="report-details">
-          <span class="report-info">ID Dataset: {{ objeto.idDataset }}</span><br>
-          <span class="report-info">Semana: {{ objeto.semana }}</span><br>
+          <span class="report-info">ID Dataset: {{ objeto.idDataset }}</span>
+          <span class="report-info">Semana: {{ objeto.semana }}</span>
           <span class="report-info">Promedio: {{ objeto.promedio }}</span>
         </div>
       </li>
     </ul>
 
-    <button 
-      v-if="mostrarLista" 
-      @click="limpiarPantalla" 
-      class="btn-ocultar">
-      Ocultar reporte
-    </button>
-
     <router-link to="/seleccion" class="btn-volver">
-        Volver al menu de seleccion
+      Volver al menu de seleccion
     </router-link>
-
   </div>
 </template>
 
@@ -131,13 +132,15 @@ const mostrarCampoId = () => {
 .button-container {
   display: flex;
   justify-content: center;
+  align-items: center;
+  gap: 14px;
   flex-wrap: wrap;
-  gap: 20px;
+  margin-top: 30px;
   margin-bottom: 20px;
 }
 
 .btn-cargar {
-  background-color: #007bff;
+  background-color: #3c3d3f;
   color: white;
   border: none;
   padding: 10px 16px;
@@ -150,22 +153,7 @@ const mostrarCampoId = () => {
 }
 
 .btn-ocultar {
-  position: fixed;
-  top: 20px;
-  right: 20px;
   background-color: #dc3545;
-  color: white;
-  border: none;
-  padding: 10px 16px;
-  border-radius: 6px;
-  cursor: pointer;
-}
-
-.btn-volver {
-  position: fixed;
-  top: 40px;
-  left: 20px;
-  background-color: #007bff;
   color: white;
   border: none;
   padding: 10px 16px;
@@ -175,6 +163,17 @@ const mostrarCampoId = () => {
 
 .btn-ocultar:hover {
   background-color: #a71d2a;
+}
+
+.btn-volver {
+  position: fixed;
+  top: 40px;
+  left: 20px;
+  background-color: #007bff;
+  color: white;
+  padding: 10px 16px;
+  border-radius: 6px;
+  text-decoration: none;
 }
 
 .input-container {
@@ -197,12 +196,17 @@ const mostrarCampoId = () => {
   margin-bottom: 10px;
   padding: 10px;
   border-radius: 6px;
-  list-style: none;
   border: 1px solid #ddd;
+  list-style: none;
 }
 
 .report-info {
   display: block;
   color: #333;
+}
+
+h3 {
+  text-align: center;
+  margin-top: 20px;
 }
 </style>

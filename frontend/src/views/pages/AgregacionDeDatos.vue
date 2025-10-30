@@ -40,7 +40,7 @@ const addData = async () => {
 
 <template>
   <div>
-    <h3>Agregar datos por rango de fechas</h3>
+    <h3>Obtener serie temporal</h3>
 
     <div class="input-container">
       <input
@@ -113,13 +113,18 @@ const addData = async () => {
 }
 
 .btn-cargar {
-  background-color: #007bff;
+  background-color: #3c3d3f;
   color: white;
   border: none;
   padding: 10px 16px;
   border-radius: 6px;
   cursor: pointer;
   margin-top: 10px;
+}
+
+h3 {
+  text-align: center;
+  margin-top: 20px;
 }
 
 .btn-cargar:hover {
