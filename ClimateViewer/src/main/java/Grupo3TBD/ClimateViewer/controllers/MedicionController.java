@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/mediciones")
+@RequestMapping("/api/mediciones")
 public class MedicionController {
 
     @Autowired
@@ -28,8 +28,12 @@ public class MedicionController {
     }
 
     @GetMapping("/tendencia-mensual")
-    public List<TendenciaMensualDTO> listarTendenciaMensual() {
-        return medicionRepository.obtenerTendenciaMensual();
+    public List<TendenciaMensualDTO> obtenerTendenciaMensual(
+            @RequestParam(required = false) String dataset,
+            @RequestParam(required = false) String sensor,
+            @RequestParam(required = false) String estacion) {
+        return medicionRepository.obtenerTendenciaMensual(dataset, sensor, estacion);
     }
+
 
 }

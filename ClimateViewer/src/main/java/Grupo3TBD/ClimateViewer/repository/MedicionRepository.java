@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Repository
@@ -52,29 +53,49 @@ public class MedicionRepository {
         );
     }
 
-    public List<TendenciaMensualDTO> obtenerTendenciaMensual() {
-        jdbcTemplate.execute("REFRESH MATERIALIZED VIEW CONCURRENTLY tendencia_mensual;");
-        String sql = """
-            SELECT 
-                TipoSensor, 
-                TO_CHAR(mes, 'YYYY-MM') AS mes,
-                promedio_mensual, 
-                cantidad_mediciones
-            FROM tendencia_mensual
-            ORDER BY TipoSensor, mes;
-            """;
+    public List<TendenciaMensualDTO> obtenerTendenciaMensual(String dataset, String sensor, String estacion) {
+        StringBuilder sql = new StringBuilder("""
+   SELECT
+       tipo_sensor,
+       nombre_dataset,
+       nombre_punto,
+       TO_CHAR(mes, 'YYYY-MM') AS mes,
+       promedio_mensual,
+       cantidad_mediciones
+   FROM tendencia_mensual
+   WHERE 1=1
+   """);
+
+
+        List<Object> params = new ArrayList<>();
+
+
+        if (dataset != null && !dataset.isBlank()) {
+            sql.append(" AND nombre_dataset = ? ");
+            params.add(dataset);
+        }
+        if (sensor != null && !sensor.isBlank()) {
+            sql.append(" AND tipo_sensor = ? ");
+            params.add(sensor);
+        }
+        if (estacion != null && !estacion.isBlank()) {
+            sql.append(" AND nombre_punto = ? ");
+            params.add(estacion);
+        }
+
+        sql.append(" ORDER BY tipo_sensor, nombre_dataset, nombre_punto, mes;");
 
         return jdbcTemplate.query(
-                sql,
+                sql.toString(),
+                params.toArray(),
                 (rs, rowNum) -> new TendenciaMensualDTO(
-                        rs.getString("TipoSensor"),
+                        rs.getString("tipo_sensor"),
+                        rs.getString("nombre_dataset"),
+                        rs.getString("nombre_punto"),
                         rs.getString("mes"),
                         rs.getDouble("promedio_mensual"),
                         rs.getInt("cantidad_mediciones")
                 )
         );
     }
-
-
-
 }

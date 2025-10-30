@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import java.math.BigDecimal;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
@@ -104,13 +105,16 @@ public class PuntoMedicionRepository {
         PuntoUltimaMedicionDTO dto = new PuntoUltimaMedicionDTO();
         dto.setIdPunto(rs.getLong("idPunto"));
         dto.setNombrePunto(rs.getString("nombrePunto"));
-        dto.setLatitud((Double) rs.getObject("latitud"));
-        dto.setLongitud((Double) rs.getObject("longitud"));
+        BigDecimal lat = rs.getBigDecimal("latitud");
+        BigDecimal lon = rs.getBigDecimal("longitud");
+        dto.setLatitud(lat != null ? lat.doubleValue() : null);
+        dto.setLongitud(lon != null ? lon.doubleValue() : null);
 
         Timestamp ts = rs.getTimestamp("ultimaMedicion");
         dto.setUltimaMedicion(ts != null ? ts.toLocalDateTime() : null);
 
         return dto;
     }
+
 
 }

@@ -32,9 +32,20 @@ const routes = [
         path: '',
         name: 'Dashboard',
         component: () => import('@/views/dashboard/Dashboard.vue')
+      },
+      {
+        path: '/tendencia-mensual',
+        name: 'TendenciaMensual',
+        component: () => import('@/views/pages/TendenciaMensual.vue')
+      },
+      {
+        path: '/georreferencia',
+        name: 'Georreferencia',
+        component: () => import('@/views/pages/Georreferencia.vue')
       }
     ]
   }
+
 ]
 
 const router = createRouter({
