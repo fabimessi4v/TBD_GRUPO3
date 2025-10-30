@@ -26,6 +26,14 @@ export default [
     to: '/ResumenSemanal',
     icon: 'cil-chart',
     badge: { color: 'primary' },
+  },
+
+  {
+  component: 'CNavItem',
+  name: 'Obtener serie temporal',
+  to: '/agregaciondedatos',
+  icon: 'cil-storage',
+  badge: { color: 'primary' },
   }
 
 ]
